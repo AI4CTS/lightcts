@@ -71,6 +71,6 @@ python test_{dataset_name_in_lowercase}.py -checkpoint {path_to_the_checkpoint_f
 ## Pre-trained checkpoint files
 Pre-trained checkpoint files can be download from [Google Drive](https://drive.google.com/drive/folders/1_-jAQciSdPiI8wKkfvIvlHRk1Rnx-LJC?usp=sharing). Please add the checkpoint file path to corresponding "args.checkpoint" of the test code file.
 ## Supplementary materials
-Detailed time and space complexity analysis and parameter studies for remaining datasetscan be found at [Supplemental Materials](Supplemental_Materials/Supplemental_Materials_to_the_paper_LightCTS.pdf).
+Detailed time and space complexity analysis and parameter studies for remaining datasetscan be found at [Supplemental Material](Supplemental_Material/Supplemental_Material_to_the_paper_LightCTS.pdf).
 
 
