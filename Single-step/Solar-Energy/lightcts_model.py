@@ -1,0 +1,103 @@
+import torch
+import torch.nn as nn
+import math
+from torch.nn import BatchNorm2d, Conv2d, ModuleList
+import numpy as np
+import torch.nn.functional as F
+from transformer_model import Transformer
+
+
+def channel_shuffle(x, groups):
+    batchsize, num_channels, height, width = x.data.size()
+    channels_per_group = num_channels // groups
+    x = x.view(batchsize, groups, channels_per_group, height, width)
+    x = torch.transpose(x, 1, 2).contiguous()
+    x = x.view(batchsize, -1, height, width)
+    return x
+
+class MyTransformer(nn.Module):
+    def __init__(self,hid_dim, layers):
+        super().__init__()
+        self.layers = layers
+        self.hid_dim = hid_dim
+        self.trans = Transformer(hid_dim, layers)
+    def forward(self, x):
+        x = self.trans(x)
+        return x
+
+class SELayer(nn.Module):
+    def __init__(self, channel, reduction=8):
+        super(SELayer, self).__init__()
+        self.avg_pool = nn.AdaptiveAvgPool1d(1)
+        self.fc = nn.Sequential(
+            nn.Linear(channel, channel // reduction, bias=False),
+            nn.ReLU(inplace=True),
+            nn.Linear(channel // reduction, channel, bias=False),
+            nn.Sigmoid()
+        )
+
+    def forward(self, x):
+        b, c, _ = x.size()
+        y = self.avg_pool(x).view(b, c)
+        y = self.fc(y).view(b, c, 1)
+        return x * y.expand_as(x)
+
+
+
+class ttnet(nn.Module):
+    def __init__(self, hid_dim=32, layers=2,  group=4):
+        super(ttnet, self).__init__()
+        self.start_conv = Conv2d(in_channels=1,
+                                    out_channels=hid_dim,
+                                    kernel_size=(1, 1))
+        #一层embedding没啥light的
+        self.cnn_layers = 8
+        self.filter_convs = ModuleList()
+        self.gate_convs = ModuleList()
+        self.group=group
+        D = [1, 2, 4, 8, 16, 32, 48, 64]
+        receptive_field = 1
+        for i in range(self.cnn_layers):
+            self.filter_convs.append(Conv2d(hid_dim, hid_dim, (1, 2), dilation=D[i], groups=group))
+            self.gate_convs.append(Conv2d(hid_dim, hid_dim, (1, 2), dilation=D[i], groups=group))
+            receptive_field += D[i]
+        self.receptive_field=receptive_field
+        depth = list(range(self.cnn_layers))
+        self.bn = ModuleList([BatchNorm2d(hid_dim) for _ in depth])
+        self.end_conv1 = nn.Linear(hid_dim, hid_dim*4)
+        self.end_conv2 = nn.Linear(hid_dim*4, 1)
+        self.network = MyTransformer(hid_dim, layers=layers)
+        self.se=SELayer(hid_dim)
+
+
+    def forward(self, input):
+
+        in_len = input.size(3)
+        if in_len < self.receptive_field:
+            input = nn.functional.pad(input, (self.receptive_field - in_len, 0, 0, 0))
+        x = self.start_conv(input)
+        skip = 0
+        for i in range(self.cnn_layers):
+            residual = x
+            filter = torch.tanh(self.filter_convs[i](residual))
+            gate = torch.sigmoid(self.gate_convs[i](residual))
+            x = filter * gate
+            if self.group !=1:
+                x = channel_shuffle (x,self.group)
+            try:
+                skip += x[:, :, :, -1:]
+            except:
+                skip = 0
+            if i == self.cnn_layers-1:
+                break
+            x = x + residual[:, :, :, -x.size(3):]
+            x = self.bn[i](x)
+        x = torch.squeeze(skip, dim=-1)
+        x = x.transpose(1, 2)
+        x_residual = x
+        x = self.network(x)
+        x += x_residual
+        x = F.relu(self.end_conv1(x))
+        x = self.end_conv2(x)
+        output=x.transpose(1, 2).unsqueeze(-1)
+        return output
