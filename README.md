@@ -3,7 +3,7 @@
 # LightCTS: A Lightweight Framework for Correlated Time Series Forecasting
 This is the original implementation of LightCTS in the following paper: LightCTS: A Lightweight Framework for Correlated Time Series Forecasting.
 
-# Supplementary Material
+# Supplemental Material
 Detailed time and space complexity analysis and remaining experimental results can be found at [Supplemental Material](Supplemental_Material/Supplemental_Material_to_the_paper_LightCTS.pdf).
 
 
