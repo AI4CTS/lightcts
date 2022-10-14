@@ -66,7 +66,7 @@ python test_{dataset_name_in_lowercase}.py -checkpoint {path_to_the_checkpoint_f
 
 LightCTS is implemented on two public single-step correlated time series forecasting datasets.
 
-- **Solar** and **Electricity** datasets from [Google Drive]() originally provided by [LSTNet](https://arxiv.org/abs/1703.07015). Uncompress them and move them to the data folder.
+- **Solar** and **Electricity** datasets from [Google Drive](https://drive.google.com/drive/folders/1sw0m6MOfglsCQKzP_NuLpELjlca9avBh?usp=sharing) originally provided by [LSTNet](https://arxiv.org/abs/1703.07015). Uncompress them and move them to the data folder.
 
 <h3> Baselines </h3> 
 
@@ -89,5 +89,5 @@ python test_{dataset_name_in_lowercase}.py -checkpoint {path_to_the_checkpoint_f
 
 <h2> Pre-trained checkpoint files </h2>
 
-Pre-trained checkpoint files can be download from [Google Drive](https://drive.google.com/drive/folders/1_-jAQciSdPiI8wKkfvIvlHRk1Rnx-LJC?usp=sharing). Please add the checkpoint file path to corresponding "args.checkpoint" of the test code file.
+Pre-trained checkpoint files can be download from [Google Drive](https://drive.google.com/drive/folders/1_-jAQciSdPiI8wKkfvIvlHRk1Rnx-LJC?usp=sharing). Please replace "args.checkpoint" with the corresponding path in the test code file.
 
