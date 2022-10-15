@@ -29,7 +29,7 @@ pip3 install -r requirements.txt
 
 LightCTS is implemented on four public multi-step correlated time series forecasting datasets.
 
-- **PEMS04**, **PEMS08**, **METR-LA**, and **PEMS-BAY** can be downloaded in [Google Drive](https://drive.google.com/drive/folders/1EOuTv2w-9gaGGPm3CylMXTJ4mg3et7x7?usp=sharing). Uncompress and move them to the corresponding data folder.
+- **PEMS04**, **PEMS08**, **METR-LA**, and **PEMS-BAY** can be downloaded in [Google Drive](https://drive.google.com/drive/folders/1EOuTv2w-9gaGGPm3CylMXTJ4mg3et7x7?usp=sharing). Please move them to the corresponding data folders.
 
 <h3> Baselines </h3> 
 
@@ -64,7 +64,7 @@ python test_{dataset_name_in_lowercase}.py -checkpoint {path_to_the_checkpoint_f
 
 LightCTS is implemented on two public single-step correlated time series forecasting datasets.
 
-- **Solar** and **Electricity** datasets can be downloaded in [Google Drive](https://drive.google.com/drive/folders/1JYwtq120bkI-ze85hvtqEc8EkBoGA_U2?usp=sharing). Uncompress and move them to the corresponding data folder.
+- **Solar** and **Electricity** datasets can be downloaded in [Google Drive](https://drive.google.com/drive/folders/1JYwtq120bkI-ze85hvtqEc8EkBoGA_U2?usp=sharing). Please move them to the corresponding data folders.
 
 
 <h3> Baselines </h3> 
