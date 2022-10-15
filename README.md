@@ -29,9 +29,7 @@ pip3 install -r requirements.txt
 
 LightCTS is implemented on four public multi-step correlated time series forecasting datasets.
 
-- **PEMS04** and **PEMS08** from STSGCN (AAAI-20). Download the data [STSGCN_data.tar.gz](https://pan.baidu.com/s/1ZPIiOM__r1TRlmY4YGlolw) with password: `p72z` and uncompress data file using`tar -zxvf data.tar.gz`, and move them to the data folder.
-
-- **METR-LA** and **PEMS-BAY** from [Google Drive](https://drive.google.com/open?id=10FOTa6HXPqX8Pf5WRoRwcFnW9BrNZEIX) originally provided by [DCRNN](https://openreview.net/pdf?id=SJiHXGWAZ), please follow its instructions in its code repository for data pre-processing, and move them to the data folder.
+- **PEMS04**, **PEMS08**, **METR-LA**, and **PEMS-BAY** can be downloaded in [Google Drive](https://drive.google.com/drive/folders/1EOuTv2w-9gaGGPm3CylMXTJ4mg3et7x7?usp=sharing). Uncompress and move them to the corresponding data folder.
 
 <h3> Baselines </h3> 
 
@@ -66,7 +64,8 @@ python test_{dataset_name_in_lowercase}.py -checkpoint {path_to_the_checkpoint_f
 
 LightCTS is implemented on two public single-step correlated time series forecasting datasets.
 
-- **Solar** and **Electricity** datasets can be downloaded in [Google Drive](https://drive.google.com/drive/folders/1hO9jbJMg_JEt1bDhlKjjUIjK41Oqdmv9?usp=sharing). Uncompress them and move them to the data folder.
+- **Solar** and **Electricity** datasets can be downloaded in [Google Drive](https://drive.google.com/drive/folders/1JYwtq120bkI-ze85hvtqEc8EkBoGA_U2?usp=sharing). Uncompress and move them to the corresponding data folder.
+
 
 <h3> Baselines </h3> 
 
