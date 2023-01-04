@@ -10,7 +10,7 @@ import math
 from transformer import LightformerLayer,Lightformer
 
 class LearnedPositionalEncoding(nn.Embedding):
-    def __init__(self,d_model, dropout = 0.1,max_len = 137):
+    def __init__(self,d_model, dropout = 0.1,max_len = 321):
         super().__init__(max_len, d_model)
         self.dropout = nn.Dropout(p = dropout)
     def forward(self, x):
