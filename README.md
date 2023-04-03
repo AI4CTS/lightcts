@@ -90,3 +90,9 @@ python test_{dataset_name_in_lowercase}.py -checkpoint {path_to_the_checkpoint_f
 
 Pre-trained checkpoint files can be download from [Google Drive](https://drive.google.com/drive/folders/1rUfYkcWKsbXqSSFgn2J6wOctkEx2qmzk?usp=sharing). Please replace "args.checkpoint" with the corresponding path in the test code file.
 
+<h2> Contact </h2>
+The code might be a little messy. For any question, feel free to contact:
+```
+Zhichen Lai: zhla@cs.aau.dk
+```
+
