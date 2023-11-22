@@ -27,10 +27,9 @@ def main():
     supports = [torch.tensor(i).to(device) for i in adj_mx]
     engine = trainer(scaler, args.in_dim, args.seq_length, args.nhid, args.dropout, args.learning_rate,
                      args.weight_decay, args.device, supports, args.group)
-    engine.model.load_state_dict(torch.load(args.checkpoint))
-
     model = engine.model
     model.to(device)
+    engine.model.load_state_dict(torch.load(args.checkpoint))
     model.eval()
 
     outputs = []
