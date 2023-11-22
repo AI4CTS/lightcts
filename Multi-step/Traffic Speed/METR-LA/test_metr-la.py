@@ -30,6 +30,7 @@ def main():
     engine.model.load_state_dict(torch.load(args.checkpoint))
     model = engine.model
     model.to(device)
+    engine.model.load_state_dict(torch.load(args.checkpoint))
     model.eval()
     outputs = []
     realy = []
